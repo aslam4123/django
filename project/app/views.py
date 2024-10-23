@@ -60,5 +60,9 @@ def task5(req,unit):
         return HttpResponse((unit-100)*5)
     else:
         return HttpResponse((unit-200)*10+500)
+    
+def demo(req):
+    a='welcome'
+    return render(req,'demo.html',{'data':a})
 
         # Create your views here.
