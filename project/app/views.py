@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 def func(req):
     a=[12,34]
@@ -62,7 +62,25 @@ def task5(req,unit):
         return HttpResponse((unit-200)*10+500)
     
 def demo(req):
-    a='welcome'
+    a=[{'name':'aslam','age':21}]
     return render(req,'demo.html',{'data':a})
+
+users=[{'id':10,'name':'aslam','age':21,'email':'aslam@gmail.com'},{'id':11,'name':'yaseen','age':22,'email':'yaseen@gmail.com'},{'id':12,'name':'shahid','age':20,'email':'shahid@gmail.com'}]
+
+def display(req):
+    return render (req,'demo.html',{'users':users})
+
+def user_reg(req):
+    if req.method=="POST":
+        id=req.POST['id']
+        name=req.POST['name']
+        age=req.POST['age']
+        email=req.POST['email']
+        users.append({'id':id,'name':name,'age':age,'email':email})
+        return redirect(display)
+    else:
+        print(req.method)
+        return redirect(display)
+
 
         # Create your views here.

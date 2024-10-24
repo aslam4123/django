@@ -7,5 +7,7 @@ urlpatterns=[
     path('task3/<int:day>',views.task3),
     path('task4/<int:cost>',views.task4),
     path('task5/<int:unit>',views.task5),
-    path('demo',views.demo)
+    path('demo',views.demo),
+    path('display',views.display),
+    path('user_reg',views.user_reg)
 ]
