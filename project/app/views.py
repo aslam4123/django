@@ -65,10 +65,10 @@ def demo(req):
     a=[{'name':'aslam','age':21}]
     return render(req,'demo.html',{'data':a})
 
-users=[{'id':10,'name':'aslam','age':21,'email':'aslam@gmail.com'},{'id':11,'name':'yaseen','age':22,'email':'yaseen@gmail.com'},{'id':12,'name':'shahid','age':20,'email':'shahid@gmail.com'}]
+users=[{'id':'10','name':'aslam','age':21,'email':'aslam@gmail.com'},{'id':'11','name':'yaseen','age':22,'email':'yaseen@gmail.com'},{'id':'12','name':'shahid','age':20,'email':'shahid@gmail.com'}]
 
 def display(req):
-    return render (req,'demo.html',{'users':users})
+    return render (req,'display.html',{'users':users})
 
 def user_reg(req):
     if req.method=="POST":
@@ -81,6 +81,32 @@ def user_reg(req):
     else:
         print(req.method)
         return redirect(display)
+
+def edit_user(req,id):
+    user=''
+    for i in users:
+        if i['id']==id:
+            user=i
+    if req.method=="POST":
+        id=req.POST['id']
+        name=req.POST['name']
+        age=req.POST['age']
+        email=req.POST['email']
+        user['id']=id
+        user['name']=name
+        user['age']=age
+        user['email']=email
+        return redirect(display)
+    
+    return render(req,'edit.html',{'user':user})
+
+def delete_user(req,id):
+    for i in users:
+        if i['id']==id:
+            users.remove(i)
+    return redirect(display)
+
+
 
 
         # Create your views here.
