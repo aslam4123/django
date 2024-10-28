@@ -106,7 +106,5 @@ def delete_user(req,id):
             users.remove(i)
     return redirect(display)
 
-
-
-
-        # Create your views here.
+def index(req):
+    return render(req,'index.html')
