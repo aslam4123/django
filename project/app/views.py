@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from .models import Student
 def func(req):
     a=[12,34]
     return HttpResponse(a)
@@ -108,3 +109,7 @@ def delete_user(req,id):
 
 def index(req):
     return render(req,'index.html')
+
+def display_std(req):
+    data=Student.objects.all()
+    return render(req,'student.html',{'std':data})
