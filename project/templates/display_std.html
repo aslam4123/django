@@ -6,15 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    <table>
+    <table border="1">
         {% for i in std %}
     <tr>
         <td>{{i.id}}</td>
         <td>{{i.name}}</td>
         <td>{{i.age}}</td>
         <td>{{i.email}}</td>
+        <td>
+            <a href="edit_std/{{i.pk}}">Edit</a>
+            <a href="delete_std/{{i.pk}}">Delete</a>
+        </td>
     </tr>
-        {% endfor%}
+        {% endfor %}
     </table>
 </body>
 </html>

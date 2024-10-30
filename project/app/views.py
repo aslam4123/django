@@ -99,7 +99,7 @@ def edit_user(req,id):
         user['email']=email
         return redirect(display)
     
-    return render(req,'edit.html',{'user':user})
+    return render(req,'edit_user.html',{'user':user})
 
 def delete_user(req,id):
     for i in users:
@@ -112,4 +112,32 @@ def index(req):
 
 def display_std(req):
     data=Student.objects.all()
-    return render(req,'student.html',{'std':data})
+    return render(req,'display_std.html',{'std':data})
+
+def add_std(req):
+     if req.method=="POST":
+        roll_no=req.POST['roll_no']
+        name=req.POST['name']
+        age=req.POST['age']
+        email=req.POST['email']
+        data=Student.objects.create(roll_no=roll_no,name=name,age=age,email=email)
+        data.save()
+        return redirect(display_std)
+     else:
+        return render(req,'add_std.html')
+     
+def edit_std(req,id):
+     data=Student.objects.get(pk=id)
+     if req.method=="POST":
+        roll_no=req.POST['roll_no']
+        name=req.POST['name']
+        age=req.POST['age']
+        email=req.POST['email']
+        Student.objects.filter(pk=id).update(roll_no=roll_no,name=name,age=age,email=email)
+        return redirect(display_std)
+     return render(req,'edit_std.html',{'data':data})
+
+def delete_std(req,id):
+    data=Student.objects.get(pk=id)
+    data.delete()
+    return redirect(display_std)    
