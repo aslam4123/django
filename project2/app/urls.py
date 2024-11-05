@@ -10,6 +10,10 @@ urlpatterns=[
 #-------------shop------------
 
     path('shop_home',views.shop_home),
-    path('add_product',views.add_product)
+    path('add_product',views.add_product),
 
+
+#--------------USER-------------
+
+    path('register',views.register)
 ]
