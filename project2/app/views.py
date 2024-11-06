@@ -48,6 +48,33 @@ def add_product(req):
     else:
         return redirect(shop_login)
     
+def edit_prod(req,pid):
+    if 'eshop' in req.session:
+        if req.method=='POST':
+            prd_id=req.POST['prd_id']
+            prd_name=req.POST['prd_name']
+            prd_price=req.POST['prd_price']
+            ofr_price=req.POST['ofr_price']
+            prd_dis=req.POST['prd_dis']
+            img=req.FILES.get('img')
+            if img:
+                Product.objects.filter(pk=pid).update(pro_id=prd_id,name=prd_name,price=prd_price,ofr_price=ofr_price,img=img,dis=prd_dis)
+            else:
+                Product.objects.filter(pk=pid).update(pro_id=prd_id,name=prd_name,price=prd_price,ofr_price=ofr_price,dis=prd_dis)
+            return redirect(shop_home)
+        else:
+            data=Product.objects.get(pk=pid)
+            return render(req,'shop/edit.html',{'product':data})
+    else:
+        return redirect(shop_login)
+def delete_prod(req,pid):
+    data=Product.objects.get(pk=pid)
+    url=data.img.url
+    og_path=url.split('/')[-1]
+    os.remove('media/'+og_path)
+    data.delete()
+    return redirect(shop_home)
+    
 def register(req):
     if req.method=='POST':
         name=req.POST['name']

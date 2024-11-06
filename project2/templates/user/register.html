@@ -6,13 +6,53 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Register</h2>
+    <style>
+        table{
+            margin: auto;
+            margin-top: 10%;
+        }
+        h2{
+            text-align: center;
+        }
+        .alert{
+            width: 500px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
     <form action="" method="post">
+        <h2>REGISTER</h2>
         {% csrf_token %}
-        <input type="text" name="name" id="" placeholder="name">
-        <input type="email" name="email" id="" placeholder="Email">
-        <input type="password" name="password" id="" placeholder="password">
-        <input type="submit" value="submit">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name" id="" placeholder="name"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="email" name="email" id="" placeholder="email"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="password" id="" placeholder="password"></td>
+            </tr>
+            <tr>
+                <td></td><td><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    
+</body>
+</html>
     </form>
 </body>
 </html>
